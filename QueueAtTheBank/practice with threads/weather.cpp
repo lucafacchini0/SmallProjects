@@ -34,7 +34,11 @@ int main() {
     std::thread destroyer(destroyWeather);
 
     worker.join();
-    destroyer.join();
+    // Warning, the code under will be executed only if `worker` is finished.
+    // But since `worker` is an infinite loop, the code under will never be executed.
+
+    
+    // destroyer.join();  
 
     return 0;
 }
