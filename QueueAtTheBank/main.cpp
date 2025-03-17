@@ -56,21 +56,25 @@ int getUserInputWithTimeout(int timeout) {
 }
 
 void start() {
-    cs();
+    cs(); // Pulisce lo schermo
     srand(time(nullptr));
 
     while(true) {
+
+        // Imposta i valori random
         int num1 = rand() % 25;
         int num2 = rand() % 53;
         int timeout = (rand() % 6) + 5; 
 
+        // mt: fa in modo che 
         {
             lock_guard<mutex> lock(cout_mutex);
-            cout << "Nuovo timer iniziato: " << timeout << " secondi." << endl;
             cout << "Quanto fa " << Color::YELLOW << num1 << Color::RESET << " + " << Color::YELLOW << num2 << Color::RESET << "? ";
         }
 
         int answer = getUserInputWithTimeout(timeout);
+
+        cs();
 
         {
             lock_guard<mutex> lock(cout_mutex);
